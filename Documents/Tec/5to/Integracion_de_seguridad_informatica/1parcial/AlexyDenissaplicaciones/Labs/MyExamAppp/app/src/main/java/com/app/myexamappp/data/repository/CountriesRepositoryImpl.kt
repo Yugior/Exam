@@ -43,7 +43,13 @@ class CountriesRepositoryImpl
         /**
          * Obtiene el detalle completo de un país por su código
          */
-        override suspend fun getCountryByCode(code: String): Country = api.getCountryByCode(code).toDomain()
+        override suspend fun getCountryByCode(code: String): Country {
+            val results = api.getCountryByCode(code)
+            if (results.isEmpty()) {
+                throw NoSuchElementException("Country not found: $code")
+            }
+            return results.first().toDomain()
+        }
 
         /**
          * Obtiene el detalle completo de un país por su nombre

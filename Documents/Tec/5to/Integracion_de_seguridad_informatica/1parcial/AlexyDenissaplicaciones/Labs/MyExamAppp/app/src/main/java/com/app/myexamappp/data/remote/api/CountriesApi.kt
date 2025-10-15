@@ -37,5 +37,5 @@ interface CountriesApi {
     @GET("alpha/{code}")
     suspend fun getCountryByCode(
         @Path("code") code: String,
-    ): CountryDto // Por código devuelve un solo objeto
+    ): List<CountryDto> // Por código devuelve un solo objeto
 }
