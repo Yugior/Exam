@@ -1,9 +1,5 @@
 package com.app.myexamappp.presentation.utils
 
-/**
- * Constantes de la aplicación
- * Incluye los textos para el Self-Explained Dialog (requerimiento del examen)
- */
 object Constants {
     /**
      * Nombre del estudiante
