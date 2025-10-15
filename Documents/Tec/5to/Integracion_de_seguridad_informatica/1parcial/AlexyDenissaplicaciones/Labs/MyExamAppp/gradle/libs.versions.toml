@@ -19,6 +19,8 @@ navigationComposeVersion = "2.9.4"
 benchmarkCommon = "1.4.1"
 material3 = "1.4.0"
 material = "1.7.7"
+datastore = "1.0.0"
+
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -47,6 +49,7 @@ navigation-compose = { group = "androidx.navigation", name = "navigation-compose
 androidx-benchmark-common = { group = "androidx.benchmark", name = "benchmark-common", version.ref = "benchmarkCommon" }
 material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
