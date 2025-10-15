@@ -1,0 +1,85 @@
+@startuml
+!theme plain
+skinparam backgroundColor #FEFEFE
+skinparam componentStyle rectangle
+
+title Countries Explorer - Clean Architecture Layers
+
+package "Presentation Layer" #E3F2FD {
+    [HomeScreen] as HS
+    [CountryDetailScreen] as CDS
+    [HomeViewModel] as HVM
+    [CountryDetailViewModel] as CDVM
+    [Navigation] as NAV
+    [UI Components] as UI
+}
+
+package "Domain Layer" #FFF3E0 {
+    [GetCountriesUseCase] as GCU
+    [GetCountryDetailUseCase] as GCDU
+    [SaveLastVisitedUseCase] as SLVU
+    [GetLastVisitedUseCase] as GLVU
+    interface CountriesRepository as CR
+    [Country Model] as CM
+}
+
+package "Data Layer" #E8F5E9 {
+    [CountriesRepositoryImpl] as CRI
+    [CountriesApi] as API
+    [PreferencesManager] as PM
+    [DTOs] as DTO
+    [Mappers] as MAP
+}
+
+package "External" #F3E5F5 {
+    database "REST Countries API" as RESTAPI
+    database "DataStore" as DS
+}
+
+' Presentation -> Domain
+HS --> HVM
+CDS --> CDVM
+HVM --> GCU
+HVM --> GLVU
+CDVM --> GCDU
+CDVM --> SLVU
+NAV --> HS
+NAV --> CDS
+UI --> HS
+UI --> CDS
+
+' Domain -> Data
+GCU --> CR
+GCDU --> CR
+SLVU --> CR
+GLVU --> CR
+CR <|.. CRI
+CM --> GCU
+CM --> GCDU
+
+' Data -> External
+CRI --> API
+CRI --> PM
+API --> DTO
+DTO --> MAP
+MAP --> CM
+API --> RESTAPI
+PM --> DS
+
+note right of CR
+  Interface en Domain
+  Implementación en Data
+  (Inversión de Dependencias)
+end note
+
+note left of HVM
+  StateFlow<UiState>
+  Maneja lógica de UI
+end note
+
+note bottom of CRI
+  Caché en memoria
+  Combina API + Local Storage
+end note
+
+@enduml
