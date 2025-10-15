@@ -1,0 +1,36 @@
+UC -> UC: emit(Result.Success(country))
+UC --> VM: Flow<Result.Success>
+deactivate UC
+
+VM -> VM: _uiState.update { country = data }
+VM -> REPO: saveLastVisitedCountry("MX", "Mexico")
+activate REPO
+REPO -> DS: Save preferences
+activate DS
+DS --> REPO: Success
+deactivate DS
+REPO --> VM: Saved
+deactivate REPO
+
+VM --> CDS: uiState.collectAsStateWithLifecycle()
+deactivate VM
+
+CDS -> CDS: Recompose with country data
+CDS -> User: Show country details
+deactivate CDS
+deactivate NAV
+deactivate HS
+
+note right of VM
+  ViewModel actualiza el
+  StateFlow que la UI observa
+  reactivamente
+end note
+
+note right of REPO
+  Guarda el último país
+  visitado para restaurar
+  posición al reabrir la app
+end note
+
+@enduml
