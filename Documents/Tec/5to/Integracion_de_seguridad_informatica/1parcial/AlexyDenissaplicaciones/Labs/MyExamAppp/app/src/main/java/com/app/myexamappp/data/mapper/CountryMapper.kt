@@ -9,14 +9,14 @@ import com.app.myexamappp.domain.model.Country
  */
 fun CountrySimpleDto.toDomain(): Country =
     Country(
-        code = code,
-        name = name.common,
-        officialName = name.official ?: name.common,
-        flagUrl = flags.png,
+        code = this.code,
+        name = this.name.common,
+        officialName = this.name.official ?: this.name.common,
+        flagUrl = this.flags.png,
         capital = null,
-        region = null,
+        region = this.region,
         subregion = null,
-        population = null,
+        population = this.population,
         area = null,
         languages = emptyList(),
         currencies = emptyList(),
@@ -30,21 +30,21 @@ fun CountrySimpleDto.toDomain(): Country =
  */
 fun CountryDto.toDomain(): Country =
     Country(
-        code = code,
-        name = name.common,
-        officialName = name.official ?: name.common,
-        flagUrl = flags.png,
-        capital = capital?.firstOrNull(), // Tomamos la primera capital
-        region = region,
-        subregion = subregion,
-        population = population,
-        area = area,
-        languages = languages?.values?.toList() ?: emptyList(),
+        code = this.code,
+        name = this.name.common,
+        officialName = this.name.official ?: this.name.common,
+        flagUrl = this.flags.png,
+        capital = this.capital?.firstOrNull(),
+        region = this.region,
+        subregion = this.subregion,
+        population = this.population,
+        area = this.area,
+        languages = this.languages?.values?.toList() ?: emptyList(),
         currencies =
-            currencies?.map { (code, currency) ->
+            this.currencies?.map { (currencyCode, currency) ->
                 "${currency.name}${currency.symbol?.let { " ($it)" } ?: ""}"
             } ?: emptyList(),
-        timezones = timezones ?: emptyList(),
-        borders = borders ?: emptyList(),
-        mapUrl = maps?.googleMaps ?: maps?.openStreetMaps,
+        timezones = this.timezones ?: emptyList(),
+        borders = this.borders ?: emptyList(),
+        mapUrl = this.maps?.googleMaps ?: this.maps?.openStreetMaps,
     )

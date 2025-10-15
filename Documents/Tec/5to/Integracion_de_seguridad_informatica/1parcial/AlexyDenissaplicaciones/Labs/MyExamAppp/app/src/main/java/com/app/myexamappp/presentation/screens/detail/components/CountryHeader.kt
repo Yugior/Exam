@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
+@Suppress("ktlint:standard:function-naming")
 /**
  * Componente de encabezado del país
  * Muestra la bandera, nombre común y nombre oficial

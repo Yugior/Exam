@@ -18,12 +18,15 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
+@Suppress("ktlint:standard:function-naming")
 /**
  * Componente de carga animado (shimmer effect)
  * Muestra una animación suave mientras se cargan los datos
  */
 @Composable
-fun LoadingShimmer(modifier: Modifier = Modifier) {
+fun LoadingShimmer(
+    modifier: Modifier = Modifier,
+) {
     val shimmerColors =
         listOf(
             Color.LightGray.copy(alpha = 0.6f),
